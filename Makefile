@@ -10,7 +10,7 @@ build:
 up:
 	${DOCKER_COMPOSE} up -d
 down:
-	${DOCKER_COMPOSE} down -v --rmi=all
+	${DOCKER_COMPOSE} down -v --rmi=all --no-cache
 
 php_cli:
 	${DOCKER_COMPOSE} run -it -u www ${PHP_CLI} bash
