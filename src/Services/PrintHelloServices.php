@@ -10,7 +10,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class PrintHelloServices
 {
     private const TEMPLATE_PRINT = 'Hello: %s';
-    private const TEMPLATE_INVALID = 'Execute the command with your name, for example: bin/console %s YourName';
+    private const TEMPLATE_INVALID = 'Execute the command with your name, for example: php ./bin/console %s YourName';
     private const NAME_COMMAND = 'app:stt';
 
     public function print(SymfonyStyle $symfonyStyle, ?string $arg): int
