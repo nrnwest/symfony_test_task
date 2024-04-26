@@ -3,6 +3,8 @@
 2. cd symfony_test_task
 3. make init
 4. [test](http://localhost:4444)
+5. mnake php_cli
+6. php ./bin/console app:stt Tomas
 
 ## Requirements 
 Ubuntu system or similar. 
