@@ -19,7 +19,7 @@ composer_dev:
 	${DOCKER_COMPOSE} run -it -u www ${PHP_CLI} composer install --optimize-autoloader
 
 migrate:
-	${DOCKER_COMPOSE} run -it -u www ${PHP_CLI} bin/console doctrine:migrations:migrate --no-interaction
+	${DOCKER_COMPOSE} run -it -u www ${PHP_CLI} php ./bin/console doctrine:migrations:migrate --no-interaction
 
 init:
 	make build up composer_dev migrate wprint
