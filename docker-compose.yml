@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  symfony_test_task_php-fpm:
+    container_name: symfony_test_task_php-fpm
+    build:
+      context: ./
+      dockerfile: ./_docker/php-fpm/Dockerfile
+      args:
+        - PUID=${PUID}
+        - PGID=${PGID}
+    volumes:
+      - ./:/var/www/
+    networks:
+      - shared
+
+  symfony_test_task_php-cli:
+    container_name: symfony_test_task_php-cli
+    build:
+      context:  ./
+      dockerfile: ./_docker/php-cli/Dockerfile
+    restart: on-failure
+    volumes:
+      - ./:/var/www/
+    networks:
+      - shared
+
+  symfony_test_task_nginx:
+    container_name: symfony_test_task_nginx
+    build:
+      context: ./
+      dockerfile: ./_docker/nginx/Dockerfile
+    ports:
+      - ${NGINX_HOST_HTTP_PORT}:${NGINX_HOST_HTTP_PORT}
+    volumes:
+      - ./:/var/www:rw
+    depends_on:
+      - symfony_test_task_php-fpm
+    networks:
+      shared:
+        aliases:
+          - test.com
+          - www.test.com
+
+  symfony_test_task_postgres:
+    container_name: symfony_test_task_postgres
+    build:
+      context: ./
+      dockerfile: ./_docker/postgres/Dockerfile
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:${POSTGRES_PORT}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - symfony_test_task_postgres:/var/lib/postgresql/data:rw
+    networks:
+      - shared
+
+volumes:
+  symfony_test_task_postgres:
+    external: false
+
+networks:
+  shared:
+    name: shared
+    external: true
