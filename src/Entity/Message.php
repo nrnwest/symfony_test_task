@@ -9,13 +9,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: MessageRepository::class)]
-#[ORM\HasLifecycleCallbacks]
+#[ORM\Table(name: 'messages'), ORM\Entity(repositoryClass: MessageRepository::class), ORM\HasLifecycleCallbacks]
 class Message
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
