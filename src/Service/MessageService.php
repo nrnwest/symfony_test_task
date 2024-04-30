@@ -8,9 +8,10 @@ use App\DTO\MessageData;
 use App\Entity\Message;
 use App\Factory\MessageFactory;
 use App\Repository\Interface\MessageRepositoryInterface;
+use App\Service\Interface\MessageServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MessageService
+class MessageService implements MessageServiceInterface
 {
     private EntityManagerInterface $entityManager;
     private MessageRepositoryInterface $messageRepository;

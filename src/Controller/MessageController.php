@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
-use App\Service\MessageService;
+use App\Service\Interface\MessageServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class MessageController extends AbstractController
 {
 
-    public function __construct(private readonly MessageService $messageServices)
+    public function __construct(private readonly MessageServiceInterface $messageServices)
     {
     }
 
