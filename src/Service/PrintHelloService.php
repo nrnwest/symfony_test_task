@@ -15,6 +15,7 @@ class PrintHelloService
 
     public function print(SymfonyStyle $symfonyStyle, ?string $arg): int
     {
+        //@TODO избыточный подход можно все делать в команде а если есть сложная логика то можно выносить сюда.
         if ($arg) {
             while (true) {
                 $symfonyStyle->text(sprintf(self::TEMPLATE_PRINT, $arg));
