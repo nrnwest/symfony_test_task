@@ -10,9 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'users')]
 class User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]

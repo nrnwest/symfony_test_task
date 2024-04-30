@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240428143247 extends AbstractMigration
+final class Version20240430081045 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,9 +20,7 @@ final class Version20240428143247 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP SEQUENCE user_id_seq CASCADE');
-        $this->addSql('CREATE SEQUENCE users_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE messages (id INT NOT NULL, user_id INT NOT NULL, subject VARCHAR(255) NOT NULL, body TEXT NOT NULL, create_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE messages (id INT NOT NULL, user_id INT DEFAULT NULL, subject VARCHAR(255) NOT NULL, body TEXT NOT NULL, create_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_DB021E96A76ED395 ON messages (user_id)');
         $this->addSql('COMMENT ON COLUMN messages.create_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN messages.updated_at IS \'(DC2Type:datetime_immutable)\'');
@@ -49,8 +47,6 @@ final class Version20240428143247 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP SEQUENCE users_id_seq CASCADE');
-        $this->addSql('CREATE SEQUENCE user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('ALTER TABLE messages DROP CONSTRAINT FK_DB021E96A76ED395');
         $this->addSql('DROP TABLE messages');
         $this->addSql('DROP TABLE users');
