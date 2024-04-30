@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventListener;
 
-use App\Utility\Log;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -13,9 +13,9 @@ class LocaleRedirectListener
     private $defaultLocale;
     private $supportedLocales;
 
-    public function __construct(string $defaultLocale = 'en', array $supportedLocales = ['en', 'ru'])
+    public function __construct($defaultLocale, $supportedLocales)
     {
-        $this->defaultLocale = $defaultLocale;
+        $this->defaultLocale =  $defaultLocale;
         $this->supportedLocales = $supportedLocales;
     }
 
