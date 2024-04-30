@@ -22,11 +22,12 @@
                 <td>{{ message.id }}</td>
                 <td>{{ message.subject }}</td>
                 <td>{{ message.body }}</td>
-                <td>{{ message.createAt ? message.createAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ message.updatedAt ? message.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
+                <td >{{ message.createAt ? message.createAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td >{{ message.updatedAt ? message.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td class="d-flex align-items-center">
                     <a href="{{ path('app_message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('app_message_edit', {'id': message.id}) }}">edit</a>
+                    <a href="{{ path('app_message_edit', {'id': message.id}) }}" class="m-2">edit</a>
+                    {{ include('message/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

@@ -11,17 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/messages')]
 class MessageController extends AbstractController
 {
 
+    private const REDIRECT_MESSAGES = 'app_messages_index';
+
     public function __construct(private readonly MessageServiceInterface $messageServices)
     {
     }
 
-    #[Route('/', name: 'app_messages_index', methods: ['GET'])]
+    #[Route('/', name: self::REDIRECT_MESSAGES, methods: ['GET'])]
     public function index(): Response
     {
         $messages = $this->messageServices->getAll();
@@ -39,7 +40,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->messageServices->create($message);
 
-            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(self::REDIRECT_MESSAGES, [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('message/new.html.twig', compact('form', 'message'));
@@ -60,7 +61,7 @@ class MessageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->messageServices->update($message);
 
-            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(self::REDIRECT_MESSAGES, [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('message/edit.html.twig', compact('form', 'message'));
@@ -73,6 +74,6 @@ class MessageController extends AbstractController
             $this->messageServices->delete($message);
         }
 
-        return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute(self::REDIRECT_MESSAGES, [], Response::HTTP_SEE_OTHER);
     }
 }
