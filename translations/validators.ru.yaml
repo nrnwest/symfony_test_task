@@ -1,0 +1,1 @@
+"This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.": "Это значение слишком короткое. Оно должно содержать {{ limit }} символов или больше."

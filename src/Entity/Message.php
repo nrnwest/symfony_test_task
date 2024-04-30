@@ -18,7 +18,7 @@ class Message
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(
-        min: 20,
+        min: 10,
         max: 255
     )]
     private string $subject;
@@ -36,6 +36,10 @@ class Message
 
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'messages')]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true, onDelete: 'cascade')]
+    private ?User $user;
 
     public function getId(): ?int
     {

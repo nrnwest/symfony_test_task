@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Services\PrintHelloServices;
+use App\Service\PrintHelloService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class SttCommand extends Command
 {
-    public function __construct(private readonly PrintHelloServices $printHelloServices)
+    public function __construct(private readonly PrintHelloService $printHelloServices)
     {
         parent::__construct();
     }

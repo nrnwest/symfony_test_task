@@ -6,17 +6,18 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
-use App\Services\MessageServices;
+use App\Service\MessageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/messages')]
 class MessageController extends AbstractController
 {
 
-    public function __construct(private MessageServices $messageServices)
+    public function __construct(private readonly MessageService $messageServices)
     {
     }
 
@@ -36,18 +37,18 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->messageServices->write($message);
+            $this->messageServices->create($message);
 
             return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('message/new.html.twig',  compact('form', 'message'));
+        return $this->render('message/new.html.twig', compact('form', 'message'));
     }
 
     #[Route('/{id}', name: 'app_message_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Message $message): Response
     {
-        return $this->render('message/show.html.twig',  compact('message'));
+        return $this->render('message/show.html.twig', compact('message'));
     }
 
     #[Route('/{id}/edit', name: 'app_message_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
@@ -57,7 +58,7 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->messageServices->update();
+            $this->messageServices->update($message);
 
             return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
         }

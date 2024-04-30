@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Service;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class PrintHelloServices
+class PrintHelloService
 {
     private const TEMPLATE_PRINT = 'Hello: %s';
     private const TEMPLATE_INVALID = 'Execute the command with your name, for example: php ./bin/console %s YourName';
