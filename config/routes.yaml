@@ -3,8 +3,4 @@
 controllers:
     resource: '../src/Controller/'
     type: attribute
-    prefix: '/{_locale}'
-    requirements:
-        _locale: 'en|ru'
-    defaults:
-        _locale: 'en'
+

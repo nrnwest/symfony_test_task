@@ -8,15 +8,17 @@ use App\DTO\MessageData;
 use App\Entity\Message;
 use App\Factory\MessageFactory;
 use App\Repository\Interface\MessageRepositoryInterface;
+use App\Repository\MessageRepository;
 use App\Service\Interface\MessageServiceInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class MessageService implements MessageServiceInterface
 {
     private EntityManagerInterface $entityManager;
-    private MessageRepositoryInterface $messageRepository;
+    private ServiceEntityRepository $messageRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, MessageRepositoryInterface $messageRepository)
+    public function __construct(EntityManagerInterface $entityManager, MessageRepository $messageRepository)
     {
         $this->entityManager = $entityManager;
         $this->messageRepository = $messageRepository;

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\Interface\MessageRepositoryInterface;
+use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Table(name: 'messages'), ORM\Entity(repositoryClass: MessageRepositoryInterface::class), ORM\HasLifecycleCallbacks]
+#[ORM\Table(name: 'messages'), ORM\Entity(repositoryClass: MessageRepository::class), ORM\HasLifecycleCallbacks]
 class Message
 {
     #[ORM\Id, ORM\GeneratedValue('AUTO'), ORM\Column(type: 'integer')]
