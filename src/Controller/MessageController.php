@@ -33,17 +33,16 @@ class MessageController extends AbstractController
     #[Route('/new', name: 'app_message_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $message = new Message();
-        $form    = $this->createForm(MessageType::class, $message);
+        $form    = $this->createForm(MessageType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->messageServices->create($message);
+            $this->messageServices->create($form->getData());
 
             return $this->redirectToRoute(self::REDIRECT_MESSAGES, [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('message/new.html.twig', compact('form', 'message'));
+        return $this->render('message/new.html.twig', compact('form'));
     }
 
     #[Route('/{id}', name: 'app_message_show', requirements: ['id' => '\d+'], methods: ['GET'])]

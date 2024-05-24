@@ -18,7 +18,7 @@ class MessageService implements MessageServiceInterface
     private EntityManagerInterface $entityManager;
     private ServiceEntityRepository $messageRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, MessageRepository $messageRepository)
+    public function __construct(EntityManagerInterface $entityManager, MessageRepositoryInterface $messageRepository)
     {
         $this->entityManager = $entityManager;
         $this->messageRepository = $messageRepository;
