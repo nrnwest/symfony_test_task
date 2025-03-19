@@ -12,7 +12,6 @@ The system must have: docker, docker-compose, make installed.
 
 
 Test Task
-for Junior PHP Developer
 1. Развернуть проект на symfony.
 2. Сделать минимальное CRUD-приложение:
    ● GET/POST/UPDATE/DELETE
